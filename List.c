@@ -91,7 +91,7 @@ ListGetElement
 ====================
 */
 void * ListGetElement( usList_t ** list, int numElement ) {
-	if ( numElement < 0 || numElement >= ListSize( list ) || *list == NULL ) {
+	if ( numElement < 0 || *list == NULL || numElement >= ListSize( list ) ) {
 		return NULL;
 	}
 	usList_t * pList = *list;
@@ -103,13 +103,13 @@ void * ListGetElement( usList_t ** list, int numElement ) {
 
 /*
 ====================
-ListDeleteElement
+ListDeleteElementAtNumber
 
 	Удаляет элемент под номером numElement, в случае ошибки возвращает -1
 ====================
 */
-int ListDeleteElement( usList_t ** list, int numElement ) {
-	if ( numElement < 0 || numElement >= ListSize( list ) || *list == NULL ) {
+int ListDeleteElementAtNumber( usList_t ** list, int numElement ) {
+	if ( numElement < 0 || *list == NULL || numElement >= ListSize( list ) ) {
 		return -1;
 	}
 	usList_t * pList = (*list);
@@ -135,6 +135,45 @@ int ListDeleteElement( usList_t ** list, int numElement ) {
 		free( pList );
 	}
 	return 0;
+}
+
+/*
+====================
+ListDeleteElementAtData
+
+	Удаляет элемент у которого совпадает указатель данных, в случае ошибки возвращает -1
+====================
+*/
+int ListDeleteElementAtData( usList_t ** list, void * data ) {
+	if ( data == NULL || *list == NULL ) {
+		return -1;
+	}
+	usList_t * pList = (*list);
+	while ( pList->data_ != data ) {
+		pList = pList->rightNode_;
+		if ( pList == NULL ) {
+			return -1;
+		}
+	}
+	if ( pList->leftNode_ == NULL && pList->rightNode_ == NULL ) {
+		free( (*list)->data_ );
+		free( (*list) );
+		(*list) = NULL;
+	} else if ( pList->leftNode_ == NULL ) {
+		(*list) = (*list)->rightNode_;
+		free( (*list)->leftNode_->data_ );
+		free( (*list)->leftNode_ );
+		(*list)->leftNode_ = NULL;
+	} else if ( (*list)->rightNode_ == NULL ) {
+		pList->leftNode_->rightNode_ = NULL;
+		free( pList->data_ );
+		free( pList );
+	} else {
+		pList->leftNode_->rightNode_ = pList->rightNode_;
+		free( pList->data_ );
+		free( pList );
+	}
+	return -1;
 }
 
 /*

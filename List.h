@@ -15,7 +15,8 @@ int			ListPushBack( usList_t ** list, void *data );
 int			ListPushFront( usList_t ** list, void *data );
 int			ListSize( usList_t ** list );
 void *		ListGetElement( usList_t ** list, int numElement );
-int			ListDeleteElement( usList_t ** list, int numElement );
+int			ListDeleteElementAtNumber( usList_t ** list, int numElement );
+int			ListDeleteElementAtData( usList_t ** list, void * data );
 void *		ListPopBack( usList_t ** list );
 void *		ListPopFront( usList_t ** list );
 
