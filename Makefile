@@ -20,7 +20,7 @@ $(pathlib)/libList.a : $(libobj)
 	ranlib $(pathlib)/libList.a
 
 $(path)/%.o : %.c
-	$(comp) -c $< -o $@ -g
+	$(comp) -c $< -o $@
 
 clean :
 	rm -rf $(path)/* $(pathlib)/*
