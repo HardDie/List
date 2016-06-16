@@ -173,7 +173,7 @@ int ListDeleteElementAtData( usList_t ** list, void * data ) {
 		free( pList->data_ );
 		free( pList );
 	}
-	return -1;
+	return 0;
 }
 
 /*
