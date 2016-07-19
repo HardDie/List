@@ -2,8 +2,6 @@
 #define _LIST_H_
 #include <stdlib.h>
 
-struct usList_t;
-
 typedef struct usList_t {
 	struct usList_t *		leftNode_;
 	struct usList_t *		rightNode_;
