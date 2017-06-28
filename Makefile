@@ -1,26 +1,20 @@
 comp=gcc -std=c99 -Wall
 
-lib=-lList
 path=bin
-pathlib=lib
-
 obj=	\
-	$(path)/main.o
-
-libobj=	\
 	$(path)/List.o
 
-all : $(pathlib)/libList.a $(path)/main
+all : check_bin $(path)/libList.a
 
-$(path)/main : $(obj) $(pathlib)/libList.a
-	$(comp) $(obj) -o $(path)/main -L$(pathlib) $(lib)
-
-$(pathlib)/libList.a : $(libobj)
-	ar rc $(pathlib)/libList.a $(libobj)
-	ranlib $(pathlib)/libList.a
+$(path)/libList.a : $(obj)
+	ar rc $(path)/libList.a $(obj)
+	ranlib $(path)/libList.a
 
 $(path)/%.o : %.c
 	$(comp) -c $< -o $@
 
+check_bin :
+	@ if [ ! -d $(path) ]; then mkdir $(path); fi
+
 clean :
-	rm -rf $(path)/* $(pathlib)/*
+	rm -rf $(path)
