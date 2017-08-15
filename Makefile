@@ -1,20 +1,31 @@
-comp=gcc -std=c99 -Wall
+ifndef V
+	QUIET_CC       = @echo ' ' CC '     ' $@;
+	QUIET_AR       = @echo ' ' AR '     ' $@;
+	QUIET_RAN      = @echo ' ' RAN '    ' $@;
+	QUIET_BUILT_IN = @echo ' ' BUILTIN '' $@;
+	QUIET_CLEAN    = @echo ' ' CLEAN '  ' $<;
+endif
+
+CC = cc
+CFLAGS = -std=c99
+RM = rm -f
+AR = ar
 
 path=bin
-obj=	\
+obj= \
 	$(path)/List.o
 
 all : check_bin $(path)/libList.a
 
 $(path)/libList.a : $(obj)
-	ar rc $(path)/libList.a $(obj)
-	ranlib $(path)/libList.a
+	$(QUIET_AR)$(AR) rc $(path)/libList.a $(obj)
+	$(QUIET_RAN)ranlib $(path)/libList.a
 
 $(path)/%.o : %.c
-	$(comp) -c $< -o $@
+	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@
 
 check_bin :
 	@ if [ ! -d $(path) ]; then mkdir $(path); fi
 
-clean :
-	rm -rf $(path)
+clean : $(path)
+	$(QUIET_CLEAN)$(RM) -r $(path)
