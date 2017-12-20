@@ -24,7 +24,7 @@ ListPushBack
 	Добавляет элемент в конец списка
 ====================
 */
-int	ListPushBack( usList_t ** list, void *data ) {
+int ListPushBack( usList_t ** list, void *data ) {
 	if ( (*list) == NULL ) {
 		(*list) = malloc( sizeof( usList_t ) );
 		(*list)->leftNode_ = NULL;
@@ -50,7 +50,7 @@ ListPushFront
 	Добавляет элемент в начало списка
 ====================
 */
-int	ListPushFront( usList_t ** list, void *data ) {
+int ListPushFront( usList_t ** list, void *data ) {
 	if ( (*list)->data_ == NULL ) {
 		(*list) = malloc( sizeof( usList_t ) );
 		(*list)->leftNode_ = NULL;
@@ -73,7 +73,7 @@ ListSize
 	Возвращает размер списка
 ====================
 */
-int	ListSize( usList_t ** list ) {
+int ListSize( usList_t ** list ) {
 	int i = 0;
 	usList_t * pList = *list;
 	while ( pList != NULL ) {
