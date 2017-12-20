@@ -131,6 +131,7 @@ int ListDeleteElementAtNumber( usList_t ** list, int numElement ) {
 		free( pList );
 	} else {
 		pList->leftNode_->rightNode_ = pList->rightNode_;
+		pList->rightNode_->leftNode_ = pList->leftNode_;
 		free( pList->data_ );
 		free( pList );
 	}
@@ -170,6 +171,7 @@ int ListDeleteElementAtData( usList_t ** list, void * data ) {
 		free( pList );
 	} else {
 		pList->leftNode_->rightNode_ = pList->rightNode_;
+		pList->rightNode_->leftNode_ = pList->leftNode_;
 		free( pList->data_ );
 		free( pList );
 	}
